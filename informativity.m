@@ -1,0 +1,19 @@
+function [I] = informativity (new)
+one = new(1:50,:);
+two = new(51:100,:);
+three = new(101:150,:);
+N1 = size(one, 1);
+N2 = size(two, 1);
+N3 = size(three, 1);
+X1 = mean(one);                     % average variables in 1st group
+X2 = mean(two);                     % average variables in 2nd group
+X3 = mean(three);                   % average variables in 3rd group
+X = mean(new);                      % average variables
+denom = 0;                          % denominator
+for i = 1:size(new, 1)
+    denom = denom + (new(i) - X)^2;       
+end
+num = N1 * (X1 - X)^2;
+num = num + N2 * (X2 - X)^2;
+num = num + N3 * (X3 - X)^2;      % numerator
+I = num / denom;
